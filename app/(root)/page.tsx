@@ -7,7 +7,6 @@ import {
 } from "@/shared/components/shared";
 import { prisma } from "@/prisma/prisma-client";
 
-// //////////////////////////////////Время 10:02 ///////////////////////
 
 export default async function Home() {
   const categories = await prisma.category.findMany({
@@ -55,3 +54,5 @@ export default async function Home() {
     </>
   );
 }
+
+// 10/25

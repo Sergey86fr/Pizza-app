@@ -4,7 +4,7 @@ import { cn } from "@/shared/lib/utils";
 import { FC } from "react";
 
 
-type Variant = {
+export type Variant = {
     name: string;
     value: string;
     disabled?: boolean;
