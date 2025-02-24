@@ -37,6 +37,7 @@ export const Header: React.FC<Props> = ({ className }) => {
             Войти
           </Button>
             <CartButton />
+            {/* не работает cartbutton */}
         </div>
       </Container>
     </header>

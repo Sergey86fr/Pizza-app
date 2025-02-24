@@ -6,26 +6,27 @@ import { ProductCard } from ".";
 import { useIntersection } from "react-use"
 import  { useEffect, useRef } from "react";
 import { useCategoryStore } from "@/shared/store/category";
+import { ProductWithRelation } from "@/@types/prisma";
 
 
 //этот пропс сделал сам пока временно
-interface IItemProps {
-    key: string;
-    id: number;
-    name: string;
-    imageUrl: string;
-    price: number
+// interface IItemProps {
+//     key: string;
+//     id: number;
+//     name: string;
+//     imageUrl: string;
+//     price: number
+// }
 
     // id: number;
     // price: number;
     // size: number | null;
     // pizzaType: number | null;
     // productId: number;
-}
 
 interface IProps {
     title: string;
-    items: IItemProps[];
+    items: ProductWithRelation[];
     categoryId: number;
     className?: string;
     listClassName?: string;
@@ -64,7 +65,8 @@ export const ProductsGroupList: React.FC<IProps> = ({
                   id= {product.id}
                   name= {product.name}
                   imageUrl={product.imageUrl}
-                  price={product.price}
+                  price={product.items[0].price}
+                  ingredients={product.ingredients}
                 //   price={product.items[0].price}
                 />
             ))}

@@ -6,44 +6,54 @@ import { Title } from "./title";
 import { Button } from "../ui";
 import { IngredientItem, PizzaImage } from ".";
 import { GroupVariants } from "./group-variants";
-import {
-  PizzaSize,
-  PizzaType,
-  pizzaTypes,
-} from "@/shared/constants/pizza";
+import { PizzaSize, PizzaType, pizzaTypes } from "@/shared/constants/pizza";
 import { Ingredient, ProductItem } from "@prisma/client";
 import { usePizzaOptions } from "@/shared/hooks";
 import { getPizzaDetails } from "@/shared/lib";
-
-
 
 interface IChoosePizzaProps {
   imageUrl: string;
   name: string;
   className?: string;
+  loading?: boolean;
   ingredients: Ingredient[];
   items: ProductItem[];
-  onClickAddCart?: VoidFunction;
+  onSubmit: (itemId: number, ingredients: number[]) => void;
 }
 
 export const ChoosePizzaForm: FC<IChoosePizzaProps> = ({
   className,
   name,
   imageUrl,
+  loading,
   ingredients,
   items,
-  onClickAddCart,
+  onSubmit,
 }) => {
+  const {
+    size,
+    type,
+    selectedIngredients,
+    addIngredient,
+    availableSizes,
+    currentItemId,
+    setSize,
+    setType,
+  } = usePizzaOptions(items);
 
-  const { size, type, selectedIngredients, addIngredient, availableSizes, setSize, setType} = usePizzaOptions(items);
-   
- const { totalPrice, textDetails} = getPizzaDetails(type, size, items, ingredients, selectedIngredients);
-
+  const { totalPrice, textDetails } = getPizzaDetails(
+    type,
+    size,
+    items,
+    ingredients,
+    selectedIngredients
+  );
 
   const handleClickAdd = () => {
-    onClickAddCart?.();
+    if (currentItemId) {
+      onSubmit(currentItemId, Array.from(selectedIngredients));
+    }
   };
- 
 
   return (
     <div className={cn(className, "flex flex-1")}>
@@ -83,6 +93,7 @@ export const ChoosePizzaForm: FC<IChoosePizzaProps> = ({
         </div>
 
         <Button
+        loading={loading}
           onClick={handleClickAdd}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
         >
