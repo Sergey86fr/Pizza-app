@@ -11,18 +11,7 @@ import { Suspense } from "react";
 
 export default async function Home({searchParams}: {searchParams: GetSearchParams}) {
   const categories = await findPizzas(searchParams);
-  // const categories = await prisma.category.findMany({
-  //   include: {
-  //     products: {
-  //       include: {
-  //         ingredients: true,
-  //         items: true,
-  //       },
-  //     },
-  //   },
-  // });
  
-  
 
   return (
     <>
@@ -59,4 +48,4 @@ export default async function Home({searchParams}: {searchParams: GetSearchParam
   );
 }
 
-// 14/36
+// 15/32

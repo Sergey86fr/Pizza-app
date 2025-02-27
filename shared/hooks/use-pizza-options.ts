@@ -10,7 +10,7 @@ interface ReturnProps {
     type: PizzaType;
     selectedIngredients: Set<number>;
     availableSizes: Variant[];
-    currentItemId: number;
+    currentItemId?: number;
     setSize: (size: PizzaSize) => void;
     setType: (type: PizzaType) => void;
     addIngredient: (id: number) => void;
@@ -32,6 +32,7 @@ export const usePizzaOptions = ( items: ProductItem[]): ReturnProps => {
           if (!isAvailableSize && availableSize) {
             setSize (Number(availableSize.value) as PizzaSize);
           }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [type]);
 
         return {

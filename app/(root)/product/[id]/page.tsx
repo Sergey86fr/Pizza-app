@@ -1,5 +1,4 @@
-import { Container, ProductImage, Title } from "@/shared/components/shared";
-import { GroupVariants } from "@/shared/components/shared/group-variants";
+import {  Container, ProductForm } from "@/shared/components/shared";
 import { prisma } from "@/prisma/prisma-client";
 import { notFound } from "next/navigation";
 
@@ -8,14 +7,86 @@ export default async function ProductPage({
 }: {
   params: { id: string };
 }) {
-  const product = await prisma.product.findFirst({ where: { id: Number(id) } });
+
+  const product = await prisma.product.findFirst({ where: { id: Number(id) },
+include: {
+  ingredients: true,
+  category: {
+    include: {
+      products: {
+        include: {
+          items: true,
+        },
+      },
+    },
+  },
+  items: true,
+},
+});
+
+
+  
+
+// const [addCartItem, loading] = userCartStore((state) => [state.addCartItem, state.loading]);
+
   if (!product) {
     return notFound();
   }
+
+  //  const firstItem = product.items[0];
+  //    const isPizzaForm = Boolean(firstItem?.pizzaType);
+
+
+    //  const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
+    //   try {
+  
+    //       const itemId = productItemId ?? firstItem.id;
+          
+          
+    //          await addCartItem({
+    //           productItemId: itemId,
+    //           ingredients,
+    //          });
+          
+      
+    //       toast.success(product.name +  "добавлен в корзину");
+        
+  
+    //   } catch (err) {
+    //       toast.error("Не удалось добавить товар в корзину");
+    //     console.log(err);
+    //   }
+    
+    // }
+
+
+
   return (
     <Container className="flex flex-col my-10">
-      <div className="flex flex-1">
-        <ProductImage imageUrl={product.imageUrl} size={40} />
+  <ProductForm product={product} />
+
+
+{/* {isPizzaForm ? (
+          // <ChoosePizzaForm
+          //   imageUrl={product.imageUrl}
+          //   name={product.name}
+          //   ingredients={product.ingredients}
+          //   items={product.items}
+          //   onSubmit={onSubmit}
+          //   loading={loading}
+          // />
+        ) : (
+          // <ChooseProductForm
+          //   imageUrl={product.imageUrl}
+          //   name={product.name}
+          //   price={firstItem.price}
+          //   onSubmit={onSubmit}
+          //   loading={loading}
+          // />
+        )} */}
+
+      {/* <div className="flex flex-1">
+        <PizzaImage imageUrl={product.imageUrl} size={40} />
         <div className="w-[490px] bg-[#FCFCFC] p-7">
           <Title
             text={product.name}
@@ -43,7 +114,7 @@ export default async function ProductPage({
             ]}
           />
         </div>
-      </div>
+      </div> */}
     </Container>
   );
 }

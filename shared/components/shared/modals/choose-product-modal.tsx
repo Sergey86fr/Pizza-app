@@ -4,11 +4,10 @@ import { DialogContent } from "@/shared/components/ui/dialog";
 import { cn } from "@/shared/lib/utils";
 import { FC } from "react";
 import { useRouter } from "next/navigation";
-import { ChooseProductForm } from "..";
+import {  ProductForm } from "..";
 import { ProductWithRelation } from "@/@types/prisma";
-import { ChoosePizzaForm } from "../choose-pizza-form";
-import { userCartStore } from "@/shared/store";
-import toast from "react-hot-toast";
+// import { userCartStore } from "@/shared/store";
+// import toast from "react-hot-toast";
 
 interface IProps {
   product: ProductWithRelation;
@@ -17,9 +16,9 @@ interface IProps {
 
 export const ChooseProductModal: FC<IProps> = ({ product, className }) => {
   const router = useRouter();
-  const firstItem = product.items[0];
-  const isPizzaForm = Boolean(firstItem?.pizzaType);
-  const [addCartItem, loading] = userCartStore((state) => [state.addCartItem, state.loading]);
+  // const firstItem = product.items[0];
+  // const isPizzaForm = Boolean(firstItem?.pizzaType);
+  // const [addCartItem, loading] = userCartStore((state) => [state.addCartItem, state.loading]);
 
 //   const onAddProduct = () => {
 //     addCartItem({
@@ -36,27 +35,27 @@ export const ChooseProductModal: FC<IProps> = ({ product, className }) => {
   
 //   };
 
-  const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
-    try {
+  // const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
+  //   try {
 
-        const itemId = productItemId ?? firstItem.id;
+  //       const itemId = productItemId ?? firstItem.id;
         
         
-           await addCartItem({
-            productItemId: itemId,
-            ingredients,
-           });
+  //          await addCartItem({
+  //           productItemId: itemId,
+  //           ingredients,
+  //          });
         
     
-        toast.success(product.name +  "добавлен в корзину");
-      router.back();
+  //       toast.success(product.name +  "добавлен в корзину");
+  //     router.back();
 
-    } catch (err) {
-        toast.error("Не удалось добавить товар в корзину");
-      console.log(err);
-    }
+  //   } catch (err) {
+  //       toast.error("Не удалось добавить товар в корзину");
+  //     console.log(err);
+  //   }
   
-  }
+  // }
 
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
@@ -66,8 +65,10 @@ export const ChooseProductModal: FC<IProps> = ({ product, className }) => {
           className
         )}
       >
+
+        <ProductForm product={product} onSubmit={() => router.back()} />
         {/* <Title text={product.name} /> */}
-        {isPizzaForm ? (
+        {/* {isPizzaForm ? (
           <ChoosePizzaForm
             imageUrl={product.imageUrl}
             name={product.name}
@@ -84,7 +85,7 @@ export const ChooseProductModal: FC<IProps> = ({ product, className }) => {
             onSubmit={onSubmit}
             loading={loading}
           />
-        )}
+        )} */}
       </DialogContent>
     </Dialog>
   );

@@ -12,9 +12,10 @@ interface IProps {
 }
 
 export const CartButton: FC<IProps> = ({ className }) => {
+ 
 
-  const [totalAmount, items, loading] = userCartStore((state) => [state.totalAmount, state.items, state.loading]);
-
+  const [totalAmount, items, loading] = userCartStore(state => [state.totalAmount, state.items, state.loading]);
+  
   return (
     // поискать проблему в cartDrawer
     <CartDrawer>
