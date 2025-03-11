@@ -8,12 +8,15 @@ import { SearchInput } from "./search-input";
 import { CartButton } from "./cart-button";
 
 interface Props {
+  hasSearch?: boolean;
+  hasCart?: boolean;
   className?: string;
 }
 
-export const Header: React.FC<Props> = ({ className }) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, className }) => {
   return (
-    <header className={cn("border border-b", className)}>
+    <header className={cn("border-b", className)}>
       <Container className="flex items-center justify-between py-8">
         <Link href="/">
           <div className="flex items-center gap-4">
@@ -27,17 +30,23 @@ export const Header: React.FC<Props> = ({ className }) => {
           </div>
         </Link>
 
+        {hasSearch && (
         <div className="mx-10  flex-1">
           <SearchInput className={""} />
         </div>
+        )}
+
 
         <div className="flex items-center gap-3">
           <Button variant="outline" className="flex items-center gap-1">
             <User size={16} />
             Войти
           </Button>
+
+          {hasCart && (
             <CartButton />
-            {/* не работает cartbutton */}
+          )}
+          {/* не работает cartbutton */}
         </div>
       </Container>
     </header>

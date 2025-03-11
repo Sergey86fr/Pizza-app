@@ -3,22 +3,22 @@ generator client {
 }
 
 datasource db {
-    provider  = "postgresql"
-    url       = env("POSTGRES_URL")
-    directUrl = env("POSTGRES_URL_NON_POOLING")
+    provider           = "postgresql"
+    url                = env("POSTGRES_URL")
+    directUrl          = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
     id Int @id @default(autoincrement())
 
     fullName String
-    email    String @unique
+    email    String   @unique
     password String
-    role     UserRole   @default(USER)
+    role     UserRole @default(USER)
     verified DateTime
 
-    provider       String?
-    providerId     String?
+    provider   String?
+    providerId String?
 
     cart             Cart?
     orders           Order[]
@@ -32,6 +32,9 @@ model Category {
     id       Int       @id @default(autoincrement())
     name     String    @unique
     products Product[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
 model Product {
@@ -73,8 +76,8 @@ model Ingredient {
     products  Product[]
     cartItems CartItem[]
 
-    createdAt  DateTime  @default(now())
-    updatedAt  DateTime  @updatedAt
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
 model Cart {
@@ -113,14 +116,14 @@ model CartItem {
 model Order {
     id Int @id @default(autoincrement())
 
-    user User? @relation(fields: [userId], references: [id])
+    user   User? @relation(fields: [userId], references: [id])
     userId Int?
-    
+
     token String
 
     totalAmount Int
-    status  OrderStatus
-    paymentId String?
+    status      OrderStatus
+    paymentId   String?
 
     items Json
 
@@ -137,12 +140,12 @@ model Order {
 model VerificationCode {
     id Int @id @default(autoincrement())
 
-    user User @relation(fields: [userId], references: [id])
-    userId Int @unique
+    user   User @relation(fields: [userId], references: [id])
+    userId Int  @unique
 
     code String
 
-   createdAt DateTime @default(now())
+    createdAt DateTime @default(now())
 }
 
 enum OrderStatus {

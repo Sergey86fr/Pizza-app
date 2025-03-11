@@ -157,4 +157,22 @@ export const _ingredients = [
         'https://media.dodostatic.net/image/r:292x292/0194b1fc103679798e9d61b31d5818b2.avif',
         categoryId: 8,
     },
+    {
+      name: 'Омлет',
+      imageUrl:
+        'https://media.dodostatic.net/image/r:292x292/0194b1f77c5670dca7df6e7b702d8db8.avif',
+        categoryId: 8,
+    },
+    {
+      name: 'Омлет с грибами',
+      imageUrl:
+        'https://media.dodostatic.net/image/r:292x292/0194b1f77c5670dca7df6e7b702d8db8.avif',
+        categoryId: 8,
+    },
+    {
+      name: 'Омлет сырный с грибами',
+      imageUrl:
+        'https://media.dodostatic.net/image/r:292x292/0194b1fc103679798e9d61b31d5818b2.avif',
+        categoryId: 8,
+    },
   ]

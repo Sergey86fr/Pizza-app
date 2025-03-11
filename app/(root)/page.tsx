@@ -11,6 +11,9 @@ import { Suspense } from "react";
 
 export default async function Home({searchParams}: {searchParams: GetSearchParams}) {
   const categories = await findPizzas(searchParams);
+
+  // console.log("asd",categories);
+  
  
 
   return (
@@ -18,7 +21,8 @@ export default async function Home({searchParams}: {searchParams: GetSearchParam
       <Container className="mt-10">
         <Title text="Все пиццы" size="lg" className="font-extrabold" />
       </Container>
-      <TopBar categories={categories.filter((category) => category.products.length > 0)}/>
+      {/* <TopBar categories={categories.filter((category) => category.products.length > 0)}/> */}
+      <TopBar categories={categories.filter((category) => category)}/>
       <Container className="mt-10 pb-14">
         <div className="flex gap-[80px]">
           <div className="w-[250px]">
@@ -48,4 +52,4 @@ export default async function Home({searchParams}: {searchParams: GetSearchParam
   );
 }
 
-// 15/32
+// 16/47
