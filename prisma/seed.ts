@@ -65,6 +65,7 @@ async function up() {
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(0, 5),
+        // .map((i) => ({id: i.id})),
       },
     },
   });
@@ -77,6 +78,7 @@ async function up() {
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(5, 10),
+        // .map((i) => ({id: i.id})),
       },
     },
   });
@@ -89,6 +91,7 @@ async function up() {
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(10, 40),
+        // .map((i) => ({id: i.id})),
       },
     },
   });
