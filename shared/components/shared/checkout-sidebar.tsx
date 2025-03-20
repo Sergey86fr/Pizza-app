@@ -11,10 +11,11 @@ const DELIVERY_PRICE = 250;
 interface Props {
   className?: string;
   loading?: boolean;
+  submitting?: boolean;
   totalAmount: number;
 }
 
-export const CheckoutSidebar: FC<Props> = ({ totalAmount, loading, className }) => {
+export const CheckoutSidebar: FC<Props> = ({ totalAmount, loading, submitting, className }) => {
   const vatPrice = (totalAmount * VAT) / 100;
     const totalPrice = totalAmount + DELIVERY_PRICE + vatPrice;
 
@@ -56,6 +57,7 @@ export const CheckoutSidebar: FC<Props> = ({ totalAmount, loading, className }) 
       />
 
       <Button
+      loading={loading || submitting}
         type="submit"
         className="w-full h-14 rounded-2xl mt-6 text-base font-bold"
       >

@@ -52,4 +52,4 @@ export default async function Home({searchParams}: {searchParams: GetSearchParam
   );
 }
 
-// 17/45
+// 20/24
