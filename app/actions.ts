@@ -3,8 +3,11 @@
 import { prisma } from "@/prisma/prisma-client";
 import { PayOrderTemplate } from "@/shared/components/shared";
 import { CheckoutFormValues } from "@/shared/components/shared/checkout/checkout-form-schema";
+import { VerificationUserTemplate } from "@/shared/components/shared/email-templates/verification-user";
 import { createPayment, sendEmail } from "@/shared/lib";
+import { getUserSession } from "@/shared/lib/get-user-session";
 import { OrderStatus, Prisma } from "@prisma/client";
+import { hashSync } from "bcrypt";
 import { cookies } from "next/headers";
 
 export async function createOrder(data: CheckoutFormValues) {
@@ -180,7 +183,7 @@ export async function registerUser(body: Prisma.UserCreateInput) {
 
     await sendEmail(
       createdUser.email,
-      'Next Pizza / 📝 Подтверждение регистрации',
+      'My Pizza / 📝 Подтверждение регистрации',
       VerificationUserTemplate({
         code,
       }),

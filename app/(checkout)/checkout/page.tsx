@@ -19,13 +19,15 @@ import {
 import { cn } from "@/shared/lib/utils";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { Api } from "@/shared/services/api.client";
 
 export default function CheckoutPage() {
-  const [ submitting, setSubmitting ] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const { totalAmount, updateItemQuantity, items, removeCartItem, loading } =
     useCart();
+  const { data: session } = useSession();
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),
@@ -39,16 +41,33 @@ export default function CheckoutPage() {
     },
   });
 
+
+  useEffect(() => {
+    async function fetchUserInfo() {
+      const data = await Api.auth.getMe();
+      const [firstName, lastName] = data.fullName.split(' ');
+
+      form.setValue('firstName', firstName);
+      form.setValue('lastName', lastName);
+      form.setValue('email', data.email);
+    }
+
+    if (session) {
+      fetchUserInfo();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
+
   const onSubmit = async (data: CheckoutFormValues) => {
     try {
       setSubmitting(true);
       const url = await createOrder(data);
 
-      toast.error('Заказ успешно оформлен! 📝 Переход на оплату... ', {
-        icon: '✅',
+      toast.error("Заказ успешно оформлен! 📝 Переход на оплату... ", {
+        icon: "✅",
       });
 
-      if(url) {
+      if (url) {
         location.href = url;
       }
     } catch (err) {
@@ -97,7 +116,10 @@ export default function CheckoutPage() {
             </div>
 
             <div className="w-[450px]">
-              <CheckoutSidebar  totalAmount={totalAmount} loading={loading || submitting}/>
+              <CheckoutSidebar
+                totalAmount={totalAmount}
+                loading={loading || submitting}
+              />
             </div>
           </div>
         </form>
