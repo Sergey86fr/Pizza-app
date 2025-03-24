@@ -225,6 +225,66 @@ async function up() {
    });
 }
 
+
+await prisma.story.createMany({
+  data: [
+    {
+      previewImageUrl:
+        'https://cdn.inappstory.ru/story/oyl/xrr/tt0/9asfwogtotjkt2e2lorjuu9/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAEAQ&v=1079401124',
+    },
+    {
+      previewImageUrl:
+        'https://cdn.inappstory.ru/story/hgo/uei/szi/giwk1rgfggaoont25wrc9zu/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAEAQ&v=2250219681',
+    },
+    {
+      previewImageUrl:
+        'https://cdn.inappstory.ru/story/tx5/by7/w9t/ooaoo8ymussqnsbu1tnysky/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAEAQ&v=2809026799',
+    },
+    {
+      previewImageUrl:
+        'https://cdn.inappstory.ru/story/pti/jga/d9j/fq9upd4i3vbemjhpdtt8qtw/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAEAQ&v=1339936796',
+    },
+    {
+      previewImageUrl:
+        'https://cdn.inappstory.ru/story/zj8/f0f/ogu/x4jnqqfmxzfpuiuteli0oey/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAEAQ&v=2063215773',
+    },
+    {
+      previewImageUrl:
+        'https://cdn.inappstory.ru/story/ygm/rpv/ecb/yrdfwihk7kflzania2f70hu/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAEAQ&v=1843016496',
+    },
+  ],
+});
+
+await prisma.storyItem.createMany({
+  data: [
+    {
+      storyId: 1,
+      sourceUrl:
+        'https://cdn.inappstory.ru/file/p0/kz/vc/g4hy4ijqr2wpf3jqclgcqkrn30.webp?k=IgAAAAAAAAAEAQ',
+    },
+    {
+      storyId: 1,
+      sourceUrl:
+        'https://cdn.inappstory.ru/file/rh/hz/qk/wa7pok3fm6uoepizwndimpncgj.webp?k=IgAAAAAAAAAEAQ',
+    },
+    {
+      storyId: 1,
+      sourceUrl:
+        'https://cdn.inappstory.ru/file/c9/9j/mq/jgsi9uagwk4zvwqsfayepyv0u0.webp?k=IgAAAAAAAAAEAQ',
+    },
+    {
+      storyId: 1,
+      sourceUrl:
+        'https://cdn.inappstory.ru/file/z2/ml/0a/djxj9jvwtlevinrnoy8pfyisyp.webp?k=IgAAAAAAAAAEAQ',
+    },
+    {
+      storyId: 1,
+      sourceUrl:
+        'https://cdn.inappstory.ru/file/tx/o2/lg/mki7dgrfa1gqsmr6nddbehqyl6.webp?k=IgAAAAAAAAAEAQ',
+    },
+  ],
+});
+
 async function down() {
   await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE`;
