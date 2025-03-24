@@ -1,3 +1,5 @@
+'use client'
+
 import { FC } from "react";
 import { AddressInput, ErrorText, FormTextarea, WhiteBlock } from "..";
 // import { Input} from "../../ui";
