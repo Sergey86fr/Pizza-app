@@ -143,23 +143,23 @@ model StoryItem {
     createdAt DateTime @default(now())
 }
 
-model CartItemToIngredient {
-  A Int
-  B Int
+// model CartItemToIngredient {
+//   A Int
+//   B Int
 
-  @@id([A, B], map: "_CartItemToIngredient_AB_pkey")
-  @@index([B], map: "_CartItemToIngredient_B_index")
-  @@map("_CartItemToIngredient")
-}
+//   @@id([A, B], map: "_CartItemToIngredient_AB_pkey")
+//   @@index([B], map: "_CartItemToIngredient_B_index")
+//   @@map("_CartItemToIngredient")
+// }
 
-model IngredientToProduct {
-  A Int
-  B Int
+// model IngredientToProduct {
+//   A Int
+//   B Int
 
-  @@id([A, B], map: "_IngredientToProduct_AB_pkey")
-  @@index([B], map: "_IngredientToProduct_B_index")
-  @@map("_IngredientToProduct")
-}
+//   @@id([A, B], map: "_IngredientToProduct_AB_pkey")
+//   @@index([B], map: "_IngredientToProduct_B_index")
+//   @@map("_IngredientToProduct")
+// }
 
 enum OrderStatus {
   PENDING
