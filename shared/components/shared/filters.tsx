@@ -12,16 +12,6 @@ interface IProps {
   className?: string;
 }
 
-// interface IPriceProps {
-//   priceFrom?: number;
-//   priceTo?: number;
-// }
-
-// interface IQueryFiltersProps extends IPriceProps {
-//   pizzaTypes: string;
-//   sizes: string;
-//   ingredients: string;
-// }
 
 export const Filter: React.FC<IProps> = ({ className }) => {
  
@@ -30,11 +20,6 @@ export const Filter: React.FC<IProps> = ({ className }) => {
 
 
   useQueryFilters(filters);
-  // const searchParams = useSearchParams() as unknown as Map<
-  //   keyof IQueryFiltersProps,
-  //   string
-  // >;
-  // const router = useRouter();
 
   const items = ingredients.map((item) => ({
     value: String(item.id),
@@ -53,12 +38,6 @@ export const Filter: React.FC<IProps> = ({ className }) => {
   return (
     <div className={className}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
-
-      {/* <div className="flex flex-col gap-4">
-        <FilterCheckbox name="set" text="Можно собирать" value="1" />
-        <FilterCheckbox name="new" text="Новинки" value="2" />
-      </div> */}
-
       <CheckboxFilterGroup
         title="Тип теста"
         name="pizzaTypes"
@@ -123,56 +102,6 @@ export const Filter: React.FC<IProps> = ({ className }) => {
         items={
           items
         }
-          //   [
-          //   {
-          //     text: 'Сырный соус',
-          //     value: '1',
-          //   },
-          //   {
-          //     text: 'Моццарелла',
-          //     value: '2',
-          //   },
-          //   {
-          //     text: 'Чеснок',
-          //     value: '3',
-          //   },
-          //   {
-          //     text: 'Солённые огурчики',
-          //     value: '4',
-          //   },
-          //   {
-          //     text: 'Красный лук',
-          //     value: '5',
-          //   },
-          //   {
-          //     text: 'Томаты',
-          //     value: '6',
-          //   },
-          //   {
-          //     text: 'Сырный соус',
-          //     value: '1',
-          //   },
-          //   {
-          //     text: 'Моццарелла',
-          //     value: '2',
-          //   },
-          //   {
-          //     text: 'Чеснок',
-          //     value: '3',
-          //   },
-          //   {
-          //     text: 'Солённые огурчики',
-          //     value: '4',
-          //   },
-          //   {
-          //     text: 'Красный лук',
-          //     value: '5',
-          //   },
-          //   {
-          //     text: 'Томаты',
-          //     value: '6',
-          //   },
-          // ]
       />
     </div>
   );
