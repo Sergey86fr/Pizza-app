@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,7 +19,7 @@ import {
 import { cn } from "@/shared/lib/utils";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Api } from "@/shared/services/api.client";
 
@@ -87,6 +87,7 @@ export default function CheckoutPage() {
   };
 
   return (
+    <Suspense>
     <Container className="mt-10">
       <Title
         text="Оформление заказа"
@@ -119,5 +120,6 @@ export default function CheckoutPage() {
         </form>
       </FormProvider>
     </Container>
+    </Suspense>
   );
 }
