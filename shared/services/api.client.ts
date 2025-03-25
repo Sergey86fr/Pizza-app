@@ -9,5 +9,5 @@ export const Api = {
     ingredients,
     cart,
     auth,
-  stories,
+    stories,
 }

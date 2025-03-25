@@ -26,6 +26,8 @@ const generateProductItem = ({
 };
 
 async function up() {
+
+
   await prisma.user.createMany({
     data: [
       {
@@ -45,6 +47,7 @@ async function up() {
     ],
   });
 
+  
   await prisma.category.createMany({
     data: categories,
   });
@@ -53,10 +56,13 @@ async function up() {
     data: _ingredients,
   });
 
+
+
   await prisma.product.createMany({
     data: products,
   });
 
+  
   const pizza1 = await prisma.product.create({
     data: {
       name: "Пепперони фреш",
@@ -65,10 +71,10 @@ async function up() {
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(0, 5),
-        // .map((i) => ({id: i.id})),
       },
     },
   });
+  
 
   const pizza2 = await prisma.product.create({
     data: {
@@ -78,7 +84,6 @@ async function up() {
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(5, 10),
-        // .map((i) => ({id: i.id})),
       },
     },
   });
@@ -90,8 +95,7 @@ async function up() {
         "https://media.dodostatic.net/image/r:292x292/11ee7d61389ab51a8f648a0dba5b1689.avif",
       categoryId: 1,
       ingredients: {
-        connect: _ingredients.slice(10, 40),
-        // .map((i) => ({id: i.id})),
+        connect: _ingredients.slice(10, 18),
       },
     },
   });
@@ -103,8 +107,7 @@ async function up() {
         "https://media.dodostatic.net/image/r:584x584/019591a2e222794a81731c99f3cc34ec.avif",
       categoryId: 1,
       ingredients: {
-        connect: _ingredients.slice(10, 20),
-        // .map((i) => ({id: i.id})),
+        connect: _ingredients.slice(10, 18),
       },
     },
   });
@@ -116,8 +119,7 @@ async function up() {
         "https://media.dodostatic.net/image/r:584x584/019591c69fac7921a27e4ecd8c99f9df.avif",
       categoryId: 1,
       ingredients: {
-        connect: _ingredients.slice(0, 20),
-        // .map((i) => ({id: i.id})),
+        connect: _ingredients.slice(0, 15),
       },
     },
   });
@@ -129,8 +131,7 @@ async function up() {
         "https://media.dodostatic.net/image/r:584x584/11ee7d614cbe0530b7234b6d7a6e5f8e.avif",
       categoryId: 1,
       ingredients: {
-        connect: _ingredients.slice(5, 10),
-        // .map((i) => ({id: i.id})),
+        connect: _ingredients.slice(0,5),
       },
     },
   });
@@ -142,7 +143,6 @@ async function up() {
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(0, 10),
-        // .map((i) => ({id: i.id})),
       },
     },
   });
@@ -153,11 +153,12 @@ async function up() {
         "https://media.dodostatic.net/image/r:584x584/11ee7d617e9339cfb185921a343ad8fd.avif",
       categoryId: 1,
       ingredients: {
-        connect: _ingredients.slice(10, 20),
-        // .map((i) => ({id: i.id})),
+        connect: _ingredients.slice(3, 10),
       },
     },
   });
+
+
 
   await prisma.productItem.createMany({
     data: [
@@ -251,10 +252,10 @@ async function up() {
       generateProductItem({ productId: 36 }),
       generateProductItem({ productId: 37 }),
       generateProductItem({ productId: 38 }),
-      generateProductItem({ productId: 39 }),
-      generateProductItem({ productId: 40 }),
     ],
   });
+
+
 
    await prisma.cart.createMany({
     data: [
@@ -270,6 +271,8 @@ async function up() {
       },
     ],
    });
+
+  
 
    await prisma.cartItem.create({
         data: {
@@ -309,36 +312,38 @@ async function up() {
        },
      ],
    });
-   
+
    await prisma.storyItem.createMany({
-     data: [
-       {
-         storyId: 1,
-         sourceUrl:
-           'https://cdn.inappstory.ru/file/p0/kz/vc/g4hy4ijqr2wpf3jqclgcqkrn30.webp?k=IgAAAAAAAAAEAQ',
-       },
-       {
-         storyId: 1,
-         sourceUrl:
-           'https://cdn.inappstory.ru/file/rh/hz/qk/wa7pok3fm6uoepizwndimpncgj.webp?k=IgAAAAAAAAAEAQ',
-       },
-       {
-         storyId: 1,
-         sourceUrl:
-           'https://cdn.inappstory.ru/file/c9/9j/mq/jgsi9uagwk4zvwqsfayepyv0u0.webp?k=IgAAAAAAAAAEAQ',
-       },
-       {
-         storyId: 1,
-         sourceUrl:
-           'https://cdn.inappstory.ru/file/z2/ml/0a/djxj9jvwtlevinrnoy8pfyisyp.webp?k=IgAAAAAAAAAEAQ',
-       },
-       {
-         storyId: 1,
-         sourceUrl:
-           'https://cdn.inappstory.ru/file/tx/o2/lg/mki7dgrfa1gqsmr6nddbehqyl6.webp?k=IgAAAAAAAAAEAQ',
-       },
-     ],
-   });
+    data: [
+      {
+        storyId: 1,
+        sourceUrl:
+          'https://cdn.inappstory.ru/file/p0/kz/vc/g4hy4ijqr2wpf3jqclgcqkrn30.webp?k=IgAAAAAAAAAEAQ',
+      },
+      {
+        storyId: 1,
+        sourceUrl:
+          'https://cdn.inappstory.ru/file/rh/hz/qk/wa7pok3fm6uoepizwndimpncgj.webp?k=IgAAAAAAAAAEAQ',
+      },
+      {
+        storyId: 1,
+        sourceUrl:
+          'https://cdn.inappstory.ru/file/c9/9j/mq/jgsi9uagwk4zvwqsfayepyv0u0.webp?k=IgAAAAAAAAAEAQ',
+      },
+      {
+        storyId: 1,
+        sourceUrl:
+          'https://cdn.inappstory.ru/file/z2/ml/0a/djxj9jvwtlevinrnoy8pfyisyp.webp?k=IgAAAAAAAAAEAQ',
+      },
+      {
+        storyId: 1,
+        sourceUrl:
+          'https://cdn.inappstory.ru/file/tx/o2/lg/mki7dgrfa1gqsmr6nddbehqyl6.webp?k=IgAAAAAAAAAEAQ',
+      },
+    ],
+  });
+   
+
 }
 
 
