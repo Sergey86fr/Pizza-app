@@ -91,9 +91,6 @@ export async function POST(req: NextRequest) {
       });
     }
 
-
-    
-
     const updatedUserCart = await updateCartTotalAmount(token);
 
     const resp = NextResponse.json(updatedUserCart);
@@ -101,7 +98,6 @@ export async function POST(req: NextRequest) {
     resp.cookies.set('cartToken', token);
 
     return resp;
-
 
   } catch (error) {
     console.log(error);

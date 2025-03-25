@@ -19,7 +19,6 @@ export async function createOrder(data: CheckoutFormValues) {
       throw new Error('Cart token not found');
     }
 
-    /* Находим корзину по токену */
     const userCart = await prisma.cart.findFirst({
       include: {
         user: true,
@@ -39,17 +38,14 @@ export async function createOrder(data: CheckoutFormValues) {
       },
     });
 
-    /* Если корзина не найдена возращаем ошибку */
     if (!userCart) {
       throw new Error('Cart not found');
     }
 
-    /* Если корзина пустая возращаем ошибку */
     if (userCart?.totalAmount === 0) {
       throw new Error('Cart is empty');
     }
 
-    /* Создаем заказ */
     const order = await prisma.order.create({
       data: {
         token: cartToken,
@@ -64,7 +60,6 @@ export async function createOrder(data: CheckoutFormValues) {
       },
     });
 
-    /* Очищаем корзину */
     await prisma.cart.update({
       where: {
         id: userCart.id,
@@ -90,7 +85,6 @@ export async function createOrder(data: CheckoutFormValues) {
       throw new Error('Payment data not found');
     }
 
-
     await prisma.order.update({
       where: {
         id: order.id,
@@ -111,7 +105,6 @@ export async function createOrder(data: CheckoutFormValues) {
         paymentUrl,
       }),
     );
-
     return paymentUrl;
   } catch (err) {
     console.log('[CreateOrder] Server error', err);

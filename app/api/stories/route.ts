@@ -7,6 +7,5 @@ export async function GET() {
       items: true,
     },
   });
-
   return NextResponse.json(stories);
 }

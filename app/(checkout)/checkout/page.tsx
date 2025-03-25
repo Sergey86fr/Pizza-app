@@ -41,7 +41,6 @@ export default function CheckoutPage() {
     },
   });
 
-
   useEffect(() => {
     async function fetchUserInfo() {
       const data = await Api.auth.getMe();
@@ -55,7 +54,6 @@ export default function CheckoutPage() {
     if (session) {
       fetchUserInfo();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   const onSubmit = async (data: CheckoutFormValues) => {
@@ -94,7 +92,6 @@ export default function CheckoutPage() {
         text="Оформление заказа"
         className="font-extrabold mb-8 text-[36px]"
       />
-
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex gap-10">
@@ -105,16 +102,13 @@ export default function CheckoutPage() {
                 items={items}
                 loading={loading}
               />
-
               <CheckoutPersonalForm
                 className={cn({ "opacity-40 pointer-events-none": loading })}
               />
-
               <CheckoutAddressForm
                 className={cn({ "opacity-40 pointer-events-none": loading })}
               />
             </div>
-
             <div className="w-[450px]">
               <CheckoutSidebar
                 totalAmount={totalAmount}

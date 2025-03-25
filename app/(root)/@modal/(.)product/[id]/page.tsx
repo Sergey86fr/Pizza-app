@@ -17,6 +17,5 @@ if(!product) {
   return notFound();
 }
 
-
  return <ChooseProductModal product={product}/>;
 }

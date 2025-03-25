@@ -12,17 +12,12 @@ import { Suspense } from "react";
 
 export default async function Home({searchParams}: {searchParams: GetSearchParams}) {
   const categories = await findPizzas(searchParams);
-
-  // console.log("asd",categories);
-  
  
-
   return (
     <>
       <Container className="mt-10">
         <Title text="Все пиццы" size="lg" className="font-extrabold" />
       </Container>
-      {/* <TopBar categories={categories.filter((category) => category.products.length > 0)}/> */}
       <TopBar categories={categories.filter((category) => category)}/>
         <Stories />
       <Container className="mt-10 pb-14">
@@ -53,5 +48,3 @@ export default async function Home({searchParams}: {searchParams: GetSearchParam
     </>
   );
 }
-
-// 22/34
